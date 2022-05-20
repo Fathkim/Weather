@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_time"
+            android:id="@+id/tv_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -31,6 +31,17 @@
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/tv_item_day" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_date"/>
+" /
 
         <ImageView
             android:id="@+id/img_item_weather"
