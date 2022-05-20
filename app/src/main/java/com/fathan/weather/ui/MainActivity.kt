@@ -5,6 +5,8 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.view.ViewCompat
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel get() = _viewModel as MainViewModel
 
     private val mAdapter by lazy {WeatherAdapter()}
+    private var isLoading: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -186,9 +189,20 @@ class MainActivity : AppCompatActivity() {
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.let {
+                        isLoading = true
+                        loadingStateView()
+                        try {
+                            val inputMethodManager =
+                                getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                            inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken,0)
+                        } catch (e: Throwable) {
+                            Log.e("MainActivity", e.toString())
+                        }
                         viewModel.weatherByCity(it)
                         viewModel.forecastByCity(it)
                     }
+                    isLoading = false
+                    loadingStateView()
                     return true
                 }
 
@@ -198,5 +212,23 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
+    }
+    private fun loadingStateView() {
+        binding.apply {
+            when (isLoading) {
+                true -> {
+                    layoutWeather.visibility = View.INVISIBLE
+                    progressBar.visibility = View.VISIBLE
+                }
+                false -> {
+                layoutWeather.visibility = View.VISIBLE
+                progressBar.visibility = View.INVISIBLE
+                }
+                else -> {
+                    layoutWeather.visibility = View.INVISIBLE
+                    progressBar.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 }
