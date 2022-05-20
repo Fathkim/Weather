@@ -41,7 +41,7 @@
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/tv_date"/>
-" /
+
 
         <ImageView
             android:id="@+id/img_item_weather"
@@ -52,6 +52,7 @@
             android:contentDescription="@string/image_item_weather"
             app:layout_constraintBottom_toTopOf="@id/tv_max_temp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_icon_weather"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_time" />
 
