@@ -164,8 +164,8 @@ class MainActivity : AppCompatActivity() {
                     val lat = it.latitude
                     val lon = it.longitude
 
-                    viewModel.weatherByCurrentLocation(lat, lon)
-                    viewModel.forecastByCurrentLocation(lat, lon)
+//                    viewModel.weatherByCurrentLocation(lat, lon)
+//                    viewModel.forecastByCurrentLocation(lat, lon)
                 } catch (e: Throwable) {
                     Log.e("MainActivity", "C")
                 }
@@ -174,6 +174,8 @@ class MainActivity : AppCompatActivity() {
                 Log.e("MainActivity", "Failed getting current location")
             }
 
+        viewModel.weatherByCurrentLocation(1.9, 9.9)
+        viewModel.forecastByCurrentLocation(1.9, 9.9)
         viewModel.getWeatherByCurrentLocation().observe(this){
             setupView(it, null)
         }
